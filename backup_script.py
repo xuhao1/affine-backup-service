@@ -28,15 +28,19 @@ def create_backup(config_path='config.yaml'):
     data_dir = config['data_directory']
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
     backup_filename = f"affine-note-bk-{timestamp}.zip"
+    # Check if backup_dir directory exists, if not, create it
+    if not os.path.exists(backup_dir):
+        os.makedirs(backup_dir, exist_ok=True)
+        logging.info(f"Data directory {data_dir} created.")
     backup_path = os.path.join(backup_dir, backup_filename)
 
     try:
         logging.info("Starting pg_dump command...")
-        subprocess.run(config['pg_dump'], shell=True, check=True)
+        subprocess.run(config["commands"]['pg_dump'], shell=True, check=True)
         logging.info("pg_dump command completed successfully.")
         
         logging.info(f"Creating zip archive: {backup_path}")
-        subprocess.run(f"sudo zip -r {backup_path} {data_dir} postgres_backup.sql", shell=True, check=True)
+        subprocess.run(f"sudo zip -r {backup_path} {data_dir}", shell=True, check=True)
         logging.info(f"Backup archive {backup_path} created successfully.")
         
         subprocess.run(f"sudo chmod a+r {backup_path}", shell=True, check=True)
