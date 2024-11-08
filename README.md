@@ -63,11 +63,11 @@ This command will:
 ## Usage
 - Start the service manually:
     ```bash
-    sudo systemctl start daily_backup.service
+    sudo systemctl start affine_daily_backup.service
     ```
 - Check status:
     ```bash
-    sudo systemctl status daily_backup.timer
+    sudo systemctl status affine_daily_backup.timer
     ```
 
 ## Testing

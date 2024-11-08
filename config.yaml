@@ -2,6 +2,6 @@ backup_directory: "/home/xuhao/test_backup_path"
 data_directory: "/home/xuhao/backup-server/affine-note"
 daily_retention_days: 7
 weekly_retention_weeks: 4
-backup_cycle_days: 2  # 配置为每几天备份一次
+backup_cycle_days: 1  # 配置为每几天备份一次
 commands:
   pg_dump: "docker exec -it affine_postgres pg_dump -Uaffine -f postgres_backup.sql"
